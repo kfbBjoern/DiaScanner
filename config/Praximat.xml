@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config name="Praximat">
+    <projector>
+        <sound>sound/praximat.wav</sound>
+        <wait>3</wait>
+    </projector>
+    <camera>
+        <wait>5</wait>
+    </camera>
+</config>
