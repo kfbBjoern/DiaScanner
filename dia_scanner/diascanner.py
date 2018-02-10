@@ -1,16 +1,19 @@
 import xml.etree.ElementTree as ET
-from pygame import mixer
+from pygame import mixer, time
 
 __author__ = 'kfbBjoern'
 
 class DiaScanner:
 
     def __init__(self, configFile, nofPictures):
-        self.MaxPicture = nofPictures
+        self.MaxPictures = nofPictures
         self.CurrentPicture = 0
         self.ProjectorSound = ""
         self.ProjectorWait = 10
         self.readConfiguration(configFile)
+        self.Mixer = mixer
+        self.Mixer.init()
+        self.Mixer.music.load(self.ProjectorSound)
 
     def getNumberOfPicture(self):
         return self.MaxPictures
@@ -36,4 +39,15 @@ class DiaScanner:
                 print("unknown tag: {0}".format(xml_child.tag))
 
     def run(self):
+        maxPicture = self.getNumberOfPicture()
+        for picture in range(maxPicture):
+            print("{}".format(picture))
+            self.transport()
+            self.takePicture()
+
+    def transport(self):
+        self.Mixer.music.play()
+        time.wait(1000*self.ProjectorWait)
+
+    def takePicture(self):
         pass
